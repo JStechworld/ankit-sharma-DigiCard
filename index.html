@@ -55,7 +55,7 @@
         }
 
         .card-container:hover {
-            transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+            /* transform: translateY(-5px) rotateX(2deg) rotateY(2deg); */
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
@@ -420,7 +420,7 @@
         .shape {
             position: absolute;
             opacity: 0.1;
-            animation: float 15s infinite linear;
+            /* animation: float 15s infinite linear; */
         }
 
         .shape:nth-child(1) {
@@ -581,20 +581,19 @@
                             Group</a></div>
 
                     <div class="info">
-                        Project & People Management | A-CSPO® | CSPO® | Bridging Agile Product Strategy & Business
+                        Project & People Management | Bridging Agile Product Strategy & Business
                         Efficiency
                     </div>
 
-                    <div class="badge-container">
-                        <div class="badge">
-                            <i class="fa fa-users"></i> Team Leadership
-                        </div>
-                        <div class="badge">
-                            <i class="fa fa-lightbulb-o"></i> Strategy
-                        </div>
-                        <div class="badge">
-                            <i class="fa fa-line-chart"></i> Growth
-                        </div>
+                    <div class="badge-container" style="justify-content: flex-start;">
+                        <a href="https://bcert.me/sydmtzghl" target="_blank" class="badge"
+                            style="background: var(--accent);">
+                            <i class="fa fa-certificate"></i> A-CSPO® Certified
+                        </a>
+                        <a href="https://bcert.me/sxhsjcdby" target="_blank" class="badge"
+                            style="background: var(--primary);">
+                            <i class="fa fa-certificate"></i> CSPO® Certified
+                        </a>
                     </div>
 
                     <div class="social-icons">
@@ -625,26 +624,30 @@
                             My journey in project management stems from a deep passion for turning ideas into impact.
                         </p>
 
-                        <p>I focus on enabling data-driven decision-making by breaking down complex challenges into
-                            clear, actionable strategies that enhance operations, streamline processes, boost workforce
-                            productivity, and increase revenue.</p>
+                        <p>I focus on enabling data-driven decision making by breaking down complex challenges into
+                            clear and actionable strategies that enhance operations, streamline processes, boost workforce
+                            productivity and increase revenue.</p>
 
                         <p>
 
-                            I've been fortunate to witness and contribute to the transformation of a 20-member startup
+                            I've been fortunate to witness and contribute to the transformation of a 20 member startup
                             into a global organization of 700+, playing hands-on roles across multiple business
                             functions along the way.</p>
                     </div>
 
-                    <div class="badge-container" style="justify-content: flex-start;">
-                        <a href="https://bcert.me/sydmtzghl" target="_blank" class="badge"
-                            style="background: var(--accent);">
-                            <i class="fa fa-certificate"></i> A-CSPO® Certified
-                        </a>
-                        <a href="https://bcert.me/sxhsjcdby" target="_blank" class="badge"
-                            style="background: var(--primary);">
-                            <i class="fa fa-certificate"></i> CSPO® Certified
-                        </a>
+                    <div class="badge-container">
+                        <div class="badge">
+                            <i class="fa fa-users"></i> Team Leadership
+                        </div>
+                        <div class="badge">
+                            <i class="fa fa-users"></i> Strategy & Operations 
+                        </div>
+                        <div class="badge">
+                            <i class="fa fa-lightbulb-o"></i> Requirement Analysis
+                        </div>
+                        <div class="badge">
+                            <i class="fa fa-line-chart"></i> Business Process Improvement
+                        </div>
                     </div>
                 </div>
             </div>
@@ -653,15 +656,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const card = document.querySelector('.card-container');
-            document.addEventListener('mousemove', function (e) {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-            card.addEventListener('mouseleave', function () {
-                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
-            });
+            // const card = document.querySelector('.card-container');
+            // document.addEventListener('mousemove', function (e) {
+            //     const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            //     const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            //     card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            // });
+            // card.addEventListener('mouseleave', function () {
+            //     card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            // });
             const shapes = document.querySelectorAll('.shape');
             shapes.forEach(shape => {
                 shape.style.left = Math.random() * 90 + '%';
