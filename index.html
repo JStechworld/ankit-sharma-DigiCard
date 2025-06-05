@@ -148,6 +148,7 @@
             transition: all 0.5s ease;
             position: relative;
             z-index: 1;
+            animation: float 6s ease-in-out infinite;
         }
 
         .image:hover {
@@ -173,20 +174,34 @@
             animation: pulse 2s infinite;
         }
 
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
-                opacity: 0.7;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
 
             50% {
                 transform: scale(1.05);
-                opacity: 0.4;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             }
 
             100% {
                 transform: scale(1);
-                opacity: 0.7;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
         }
 
@@ -463,152 +478,25 @@
             animation-delay: 6s;
         }
 
-        @keyframes float {
+        @keyframes gradientBG {
             0% {
-                transform: translateY(0) rotate(0deg);
+                background-position: 0% 50%;
             }
 
             50% {
-                transform: translateY(-20px) rotate(180deg);
+                background-position: 100% 50%;
             }
 
             100% {
-                transform: translateY(0) rotate(360deg);
+                background-position: 0% 50%;
             }
         }
 
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .badge {
-            padding: 5px 10px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .badge i {
-            margin-right: 5px;
-        }
-
-        @media screen and (max-width: 767px) {
-            .container-fluid {
-                padding: 10px;
-            }
-
-            .card-container {
-                margin: 0;
-                border-radius: 15px;
-            }
-
-            .card-container-inner {
-                padding: 15px;
-                flex-direction: column;
-            }
-
-            .profile-section,
-            .content-section {
-                padding: 10px;
-                width: 100%;
-            }
-
-            .image {
-                height: 150px;
-                width: 150px;
-                margin-bottom: 20px;
-            }
-
-            .user-name {
-                font-size: 1.8rem;
-            }
-
-            .designation {
-                font-size: 1rem;
-            }
-
-            .about-me-info {
-                font-size: 0.9rem;
-            }
-
-            .about-me-head {
-                text-align: center;
-            }
-
-            .about-me-head::after {
-                margin: 10px auto;
-            }
-        }
-
-        .projects-section {
-            width: 100%;
-            padding: 20px;
-            margin-top: 30px;
-            transition: all 0.5s ease;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .projects-section.active {
-            max-height: 2000px;
-            opacity: 1;
-            padding: 20px;
-        }
-
-        /* Projects Toggle Button */
-        .projects-toggle {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 20px 0;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .projects-toggle:hover {
-            transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .projects-toggle i {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .projects-toggle.active i {
-            transform: rotate(180deg);
-        }
-
-        /* Timeline */
         .timeline {
             position: relative;
             max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
 
         .timeline::after {
@@ -621,10 +509,12 @@
             left: 50%;
             margin-left: -1px;
             z-index: 1;
+            animation: gradientBG 15s ease infinite;
+            background-size: 200% 200%;
         }
 
         .timeline-item {
-            padding: 10px 40px;
+            padding: 8px 30px;
             position: relative;
             width: 50%;
             box-sizing: border-box;
@@ -647,23 +537,28 @@
         }
 
         .timeline-content {
-            padding: 20px;
+            padding: 15px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            border: 1px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, var(--primary), var(--secondary)) border-box;
         }
 
         .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: pulse 2s infinite;
         }
 
         .timeline-content h3 {
             color: var(--primary);
-            margin-top: 0;
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
         }
 
         .timeline-item:nth-child(odd) .timeline-content::after {
@@ -692,6 +587,28 @@
             z-index: 2;
         }
 
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 8px 0;
+        }
+
+        .tech-tags span {
+            background: rgba(24, 153, 205, 0.1);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .timeline-content p {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #666;
+        }
+
         /* Project Detail View */
         .project-detail {
             position: fixed;
@@ -708,7 +625,7 @@
             pointer-events: none;
             transition: all 0.3s ease;
             overflow-y: auto;
-            padding: 20px 0;
+            padding: 15px 0;
         }
 
         .project-detail.active {
@@ -720,9 +637,9 @@
             background: white;
             width: 90%;
             max-width: 800px;
-            max-height: 85vh;
+            max-height: 90vh;
             border-radius: 15px;
-            padding: 30px;
+            padding: 20px;
             position: relative;
             transform: scale(0.9);
             transition: all 0.3s ease;
@@ -735,6 +652,29 @@
             transform: scale(1);
         }
 
+        .project-detail-content h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.4rem;
+            padding-right: 30px;
+        }
+
+        .project-detail-content .tech-stack,
+        .project-detail-content .project-overview,
+        .project-detail-content .project-features {
+            margin-bottom: 15px;
+        }
+
+        .project-detail-content ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .project-detail-content li {
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
         .close-detail {
             position: absolute;
             top: 15px;
@@ -742,7 +682,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #666;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             z-index: 1;
             width: 30px;
             height: 30px;
@@ -756,21 +696,7 @@
         .close-detail:hover {
             color: var(--accent);
             background: white;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tech-tags span {
-            background: rgba(24, 153, 205, 0.1);
-            color: var(--primary);
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            transform: rotate(90deg);
         }
 
         .platform-tags {
@@ -804,48 +730,17 @@
         }
 
         @media screen and (max-width: 767px) {
-            .timeline::after {
-                left: 31px;
+            .timeline {
+                padding: 0 10px;
+                margin: 15px auto;
             }
 
             .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content::after,
-            .timeline-item:nth-child(even) .timeline-content::after {
-                left: -38px;
-                top: 20px;
-                border: 3px solid var(--primary);
+                padding: 6px 20px;
             }
 
             .timeline-content {
-                position: relative;
-                margin-left: 0;
-            }
-
-            .timeline-content h3 {
-                font-size: 1.1rem;
-                margin-bottom: 10px;
-            }
-
-            .tech-tags {
-                margin: 8px 0;
-            }
-
-            .tech-tags span {
-                font-size: 0.75rem;
-                padding: 2px 8px;
-            }
-
-            .project-features ul {
-                columns: 1;
+                padding: 12px;
             }
 
             .project-detail {
@@ -853,15 +748,243 @@
             }
 
             .project-detail-content {
-                width: 95%;
-                padding: 20px;
-                margin: 10px;
-                max-height: 85vh;
+                padding: 15px;
+                margin: 5px auto;
             }
 
             .project-detail-content h2 {
-                padding-right: 30px;
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+
+            .tech-tags {
+                gap: 4px;
+                margin: 6px 0;
+            }
+
+            .tech-tags span {
+                padding: 2px 6px;
+                font-size: 0.7rem;
+            }
+        }
+
+        .projects-section {
+            width: 100%;
+            padding: 20px;
+            margin-top: 30px;
+            transition: all 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .projects-section.active {
+            max-height: 3000px;
+            opacity: 1;
+            padding: 20px;
+        }
+
+        /* Projects Toggle Button */
+        .projects-toggle {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        .projects-toggle:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .projects-toggle i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .projects-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        .projects-toggle::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .projects-toggle:hover::after {
+            animation: shine 1.5s;
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .badge-container[style*="justify-content: flex-start;"] {
+            margin: 15px 0;
+        }
+
+        .badge {
+            padding: 8px 15px;
+            color: white;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        .badge[style*="background: var(--accent)"] {
+            background: linear-gradient(45deg, var(--accent), #ff7b00) !important;
+        }
+
+        .badge[style*="background: var(--primary)"] {
+            background: linear-gradient(45deg, var(--primary), #0056b3) !important;
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            z-index: -1;
+            border-radius: 26px;
+            background-size: 200% 200%;
+            animation: gradientBorder 3s ease infinite;
+        }
+
+        .badge[style*="background: var(--accent)"]::before {
+            background: linear-gradient(45deg, var(--accent), #ff7b00, var(--primary));
+        }
+
+        .badge[style*="background: var(--primary)"]::before {
+            background: linear-gradient(45deg, var(--primary), #0056b3, var(--accent));
+        }
+
+        .badge i {
+            margin-right: 8px;
+            font-size: 1rem;
+            animation: certificateRotate 3s ease infinite;
+        }
+
+        @keyframes certificateRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(10deg);
+            }
+
+            75% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes gradientBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .badge::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .badge:hover::after {
+            animation: shine 1.5s;
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 767px) {
+            .badge-container {
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .badge {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .badge i {
+                font-size: 0.9rem;
+                margin-right: 6px;
             }
         }
     </style>
@@ -998,6 +1121,108 @@
                                 <div style="color: var(--accent); font-weight: 600;">View Details →</div>
                             </div>
                         </div>
+
+                        <!-- Project 3 -->
+                        <div class="timeline-item" data-project="hirest">
+                            <div class="timeline-content">
+                                <h3>Hirest – Hiring Management System</h3>
+                                <div class="tech-tags">
+                                    <span>MongoDB</span>
+                                    <span>Java</span>
+                                    <span>Node.js</span>
+                                    <span>Angular</span>
+                                </div>
+                                <p>Comprehensive hiring platform managing 50,000+ users from application to onboarding.
+                                </p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="timeline-item" data-project="custom-app">
+                            <div class="timeline-content">
+                                <h3>Custom App – Diamond Export Compliance</h3>
+                                <div class="tech-tags">
+                                    <span>Node.js</span>
+                                    <span>Java</span>
+                                    <span>React Native</span>
+                                </div>
+                                <p>Internal compliance management system for diamond export tracking and documentation.
+                                </p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 5 -->
+                        <div class="timeline-item" data-project="rou">
+                            <div class="timeline-content">
+                                <h3>ROU – Pure Rough</h3>
+                                <div class="tech-tags">
+                                    <span>React Native</span>
+                                    <span>Node.js</span>
+                                    <span>Angular</span>
+                                    <span>NoSQL</span>
+                                </div>
+                                <p>Advanced tender bidding system for rough diamonds with high-precision valuation.</p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 6 -->
+                        <div class="timeline-item" data-project="e360">
+                            <div class="timeline-content">
+                                <h3>E360 – 360 Feed Forward System</h3>
+                                <div class="tech-tags">
+                                    <span>React Native</span>
+                                    <span>Node.js</span>
+                                    <span>SQL</span>
+                                </div>
+                                <p>Comprehensive peer-to-peer 360° assessment platform for organizational evaluation.
+                                </p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 7 -->
+                        <div class="timeline-item" data-project="pmo">
+                            <div class="timeline-content">
+                                <h3>PMO Governance Tool</h3>
+                                <div class="tech-tags">
+                                    <span>.NET</span>
+                                    <span>SQL</span>
+                                </div>
+                                <p>Time & Cost Governance System for project management and resource utilization.</p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 8 -->
+                        <div class="timeline-item" data-project="gl-scheduler">
+                            <div class="timeline-content">
+                                <h3>GL Scheduler – The Glance</h3>
+                                <div class="tech-tags">
+                                    <span>PHP</span>
+                                    <span>Android</span>
+                                    <span>MySQL</span>
+                                </div>
+                                <p>Smart calendar suite for executive-level scheduling and productivity management.</p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 9 -->
+                        <div class="timeline-item" data-project="archive">
+                            <div class="timeline-content">
+                                <h3>Archive – Digital Memory System</h3>
+                                <div class="tech-tags">
+                                    <span>C#.NET</span>
+                                    <span>SQL</span>
+                                </div>
+                                <p>Digital archive system managing 50+ TB of multimedia content with NASS integration.
+                                </p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1052,6 +1277,8 @@
                                 <span>Angular</span>
                                 <span>Node.js</span>
                                 <span>React Native</span>
+                                <span>SQL</span>
+                                <span>Web-Socket</span>
                             </div>
                         </div>
 
@@ -1088,6 +1315,288 @@
                                 <li>SMS, Email, and Firebase integration for live notifications</li>
                                 <li>Highly secure system with CERT-IN cybersecurity approval</li>
                                 <li>Role-based access and mobile-first experience across iOS & Android</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hirest Detail -->
+                <div class="project-detail" id="hirest-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">Hirest – Hiring Management System</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>MongoDB</span>
+                                <span>Java</span>
+                                <span>Node.js</span>
+                                <span>Angular</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">A comprehensive hiring
+                                management system serving as a centralized platform for Recruiters, Consultants, TPOs,
+                                and Candidates. Integrated with the SRK official website via an Admin Panel for seamless
+                                career portal management. Currently handling 50,000+ users, the system supports the
+                                complete recruitment lifecycle from application to onboarding.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Admin portal integrated with SRK's official Career Page</li>
+                                <li>End-to-end recruitment flow: Application → Exam Creation & Results → GD & PI → Offer
+                                    Rollout</li>
+                                <li>Performance-based scoring with GD/PI Point Calculation</li>
+                                <li>Consultant & Recruiter performance metrics and real-time dashboards</li>
+                                <li>Logbook system to track interview rounds, feedback, and progress</li>
+                                <li>Scalable architecture managing 50K+ users and applications efficiently</li>
+                                <li>ATS integration with HCIS for synchronized employee onboarding</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom App Detail -->
+                <div class="project-detail" id="custom-app-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">Custom App – Diamond Export Compliance
+                            Management</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>Node.js</span>
+                                <span>Java</span>
+                                <span>React Native</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">An internal mobile and iPad
+                                application developed for the Customs department, enabling seamless inward and outward
+                                tracking of diamonds exported outside India. Designed to ensure compliance and
+                                streamline the stock clearance workflow with complete integration into the AMS
+                                (Automated Stock Tally) system.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Invoice & Stock Clearance Management tailored for export documentation</li>
+                                <li>Directly linked with Diamond Stock Tally – AMS System</li>
+                                <li>Bulk Challan & Invoice Generation with automated PDF export</li>
+                                <li>Real-time access across iPad and mobile platforms for on-site execution</li>
+                                <li>Designed for international shipment compliance and tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROU Detail -->
+                <div class="project-detail" id="rou-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">ROU – Pure Rough (Rough Diamond Tender Bidding
+                            System)</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>React Native</span>
+                                <span>Node.js</span>
+                                <span>Angular</span>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">An advanced iPad and mobile
+                                application designed for tender bidding of rough diamonds, where precision is critical,
+                                even a single digit variation in value can impact crores in revenue. Used by buyers to
+                                evaluate and bid on rough lots with 100s of parameters and thousands of valuation
+                                conditions factored into the system.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Offline-first architecture for real-time bidding in low or no network environments
+                                </li>
+                                <li>Advanced calculation engine handling high complexity valuation models</li>
+                                <li>User location tracking to determine Buyer's current country origin</li>
+                                <li>Reporting modules of each rough footprint tracking: from origin to final sale cost
+                                </li>
+                                <li>High-accuracy bid simulation and execution for strategic decision-making</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E360 Detail -->
+                <div class="project-detail" id="e360-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">E360 – 360 Feed Forward System</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>React Native</span>
+                                <span>Node.js</span>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">E360 is a peer-to-peer 360°
+                                assessment platform built to provide a comprehensive evaluation of every associate
+                                within the organization. Designed to foster a culture of continuous feedback, personal
+                                growth and role clarity, it enables individuals to understand their core strengths,
+                                improvement areas and alignment with organizational values through structured,
+                                role-based evaluations.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Supports multi-rater assessments: Self, Peer, Manager, and Subordinate feedback</li>
+                                <li>Real-time analytics dashboard for Leadership teams to drive development planning
+                                </li>
+                                <li>Integrated feedback loop with anonymous suggestions and sentiment tracking</li>
+                                <li>Enables growth tracking by comparing scores over multiple review cycles</li>
+                                <li>Built-in logic for weightages, normalization, and score aggregation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PMO Detail -->
+                <div class="project-detail" id="pmo-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">PMO Governance Tool – Time & Cost Governance
+                            System</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>.NET</span>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">A PMO (Project Management
+                                Office) governance tool built to manage and monitor resource utilization, project
+                                costing, and effort tracking across departments. Designed to bring transparency and
+                                accuracy to project budgeting, this tool is tightly integrated with internal HRMS for
+                                centralized user and department data management.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Timesheet management for daily, weekly, and project-wise tracking</li>
+                                <li>Automated project cost calculation based on user hours and billing rates</li>
+                                <li>Integration with internal HRMS for real-time user hierarchy and allocation data</li>
+                                <li>Monthly and quarterly effort reports, cost summaries, and burn-down views</li>
+                                <li>Streamlined approval workflows for timesheet verification and corrections</li>
+                                <li>Enhanced visibility into project resource allocation and utilization trends</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GL Scheduler Detail -->
+                <div class="project-detail" id="gl-scheduler-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">GL Scheduler – The Glance (Smart Calendar
+                            Suite)</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>PHP</span>
+                                <span>Android</span>
+                                <span>MySQL</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">GL Scheduler – The Glance is a
+                                smart calendar based scheduling and productivity tool, built to serve as an enhanced
+                                alternative to standard platforms like Google Calendar. Designed for high-level
+                                executives including CMOs & PAs, it facilitates seamless synchronization, real-time
+                                notifications, and daily operational planning.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Executive level calendar planning with custom roles for PA and CMO sync</li>
+                                <li>Real-time push notifications and alerts for meetings, travel and updates</li>
+                                <li>Fully integrated Meeting Notes and To-Do list manager for day-to-day tracking</li>
+                                <li>Monthly contribution reports highlighting high vs. low productivity areas</li>
+                                <li>Built-in agenda flow & follow-up tracking to improve meeting outcomes</li>
+                                <li>Visual calendar with drag-and-drop event planning and invite workflows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Archive Detail -->
+                <div class="project-detail" id="archive-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">Archive – Digital Memory & File Archival
+                            System</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>C#.NET</span>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">Archive is an in-house digital
+                                archive and memory storage system designed to preserve the life and legacy of the GL
+                                through organized storage of photos, videos, letters and documents. Built with a
+                                high-performance backend, it leverages NASS (Network-Attached Secure Storage) for
+                                secure, scalable and fast access file management.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Centralized system for multimedia storage: photos, videos, letters, and scanned docs
+                                </li>
+                                <li>Currently managing 50+ TB of data with 25+ concurrent users</li>
+                                <li>Smart search, tag, and category functions for quick content retrieval</li>
+                                <li>Built-in video-to-text transcription engine for searchable video archives</li>
+                                <li>View and stream high-quality files with support for multiple formats</li>
+                                <li>Backup and sync mechanisms to avoid data loss across storage nodes</li>
                             </ul>
                         </div>
                     </div>
