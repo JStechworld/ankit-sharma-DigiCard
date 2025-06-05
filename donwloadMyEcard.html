@@ -419,6 +419,17 @@
         document.querySelector('.ecard').setAttribute('tabindex', '0');
         document.querySelector('.ecard').setAttribute('aria-label', 'Ankit Sharma eCard. Click to visit profile');
 
+        // Get the exact dimensions of the eCard
+        function getEcardDimensions() {
+            const ecard = document.getElementById('ecard-to-capture');
+            const rect = ecard.getBoundingClientRect();
+            return {
+                width: rect.width,
+                height: rect.height,
+                scale: 2 // Higher scale for better quality
+            };
+        }
+
         // PNG Download
         document.getElementById('downloadPngBtn').addEventListener('click', async function () {
             const btn = this;
@@ -427,9 +438,13 @@
             statusEl.textContent = 'Generating PNG image...';
 
             try {
+                const dimensions = getEcardDimensions();
                 const element = document.getElementById('ecard-to-capture');
+
                 const canvas = await html2canvas(element, {
-                    scale: 2,
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    scale: dimensions.scale,
                     logging: false,
                     backgroundColor: null,
                     useCORS: true,
@@ -460,16 +475,24 @@
             statusEl.textContent = 'Generating SVG...';
 
             try {
+                const dimensions = getEcardDimensions();
                 const element = document.getElementById('ecard-to-capture');
-                const canvas = await html2canvas(element, { scale: 2 });
+
+                const canvas = await html2canvas(element, {
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    scale: dimensions.scale
+                });
+
                 const imgData = canvas.toDataURL('image/png');
 
                 // Create SVG with embedded PNG and link
                 const svg = `<svg xmlns="http://www.w3.org/2000/svg" 
                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                     width="${canvas.width}" height="${canvas.height}">
+                     width="${dimensions.width}" height="${dimensions.height}"
+                     viewBox="0 0 ${dimensions.width} ${dimensions.height}">
             <a xlink:href="https://connect-with-ankit.netlify.app/" target="_blank">
-                <image width="${canvas.width}" height="${canvas.height}" 
+                <image width="${dimensions.width}" height="${dimensions.height}" 
                        xlink:href="${imgData}"/>
             </a>
         </svg>`;
@@ -499,9 +522,13 @@
             statusEl.textContent = 'Generating PDF...';
 
             try {
+                const dimensions = getEcardDimensions();
                 const element = document.getElementById('ecard-to-capture');
+
                 const canvas = await html2canvas(element, {
-                    scale: 2,
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    scale: dimensions.scale,
                     logging: false,
                     backgroundColor: null,
                     useCORS: true,
@@ -509,14 +536,18 @@
                 });
 
                 const { jsPDF } = window.jspdf;
+                // Convert pixels to mm (1px = 0.264583mm)
+                const widthInMM = dimensions.width * 0.264583;
+                const heightInMM = dimensions.height * 0.264583;
+
                 const pdf = new jsPDF({
-                    orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
-                    unit: 'px',
-                    format: [canvas.width, canvas.height]
+                    orientation: widthInMM > heightInMM ? 'landscape' : 'portrait',
+                    unit: 'mm',
+                    format: [widthInMM, heightInMM]
                 });
 
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
-                pdf.link(0, 0, canvas.width, canvas.height, { url: 'https://connect-with-ankit.netlify.app/' });
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, widthInMM, heightInMM);
+                pdf.link(0, 0, widthInMM, heightInMM, { url: 'https://connect-with-ankit.netlify.app/' });
                 pdf.save('ankit-sharma-ecard.pdf');
 
                 statusEl.textContent = 'PDF download complete!';
@@ -538,8 +569,15 @@
             statusEl.textContent = 'Preparing share options...';
 
             try {
+                const dimensions = getEcardDimensions();
                 const element = document.getElementById('ecard-to-capture');
-                const canvas = await html2canvas(element, { scale: 2 });
+
+                const canvas = await html2canvas(element, {
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    scale: dimensions.scale
+                });
+
                 const imgData = canvas.toDataURL('image/png');
 
                 // Create share dialog
