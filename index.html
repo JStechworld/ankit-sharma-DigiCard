@@ -554,6 +554,316 @@
                 margin: 10px auto;
             }
         }
+
+        .projects-section {
+            width: 100%;
+            padding: 20px;
+            margin-top: 30px;
+            transition: all 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .projects-section.active {
+            max-height: 2000px;
+            opacity: 1;
+            padding: 20px;
+        }
+
+        /* Projects Toggle Button */
+        .projects-toggle {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .projects-toggle:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .projects-toggle i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .projects-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            right: -7px;
+            top: 20px;
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: -7px;
+            top: 20px;
+            background: white;
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* Project Detail View */
+        .project-detail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .project-detail.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .project-detail-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            margin: 0 auto;
+        }
+
+        .project-detail.active .project-detail-content {
+            transform: scale(1);
+        }
+
+        .close-detail {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+            z-index: 1;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+
+        .close-detail:hover {
+            color: var(--accent);
+            background: white;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tech-tags span {
+            background: rgba(24, 153, 205, 0.1);
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .platform-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .platform-tags span {
+            background: rgba(84, 176, 54, 0.1);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-features ul {
+            padding-left: 20px;
+            margin: 0;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .project-features li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            break-inside: avoid;
+        }
+
+        @media screen and (max-width: 767px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -38px;
+                top: 20px;
+                border: 3px solid var(--primary);
+            }
+
+            .timeline-content {
+                position: relative;
+                margin-left: 0;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .tech-tags {
+                margin: 8px 0;
+            }
+
+            .tech-tags span {
+                font-size: 0.75rem;
+                padding: 2px 8px;
+            }
+
+            .project-features ul {
+                columns: 1;
+            }
+
+            .project-detail {
+                padding: 10px;
+            }
+
+            .project-detail-content {
+                width: 95%;
+                padding: 20px;
+                margin: 10px;
+                max-height: 85vh;
+            }
+
+            .project-detail-content h2 {
+                padding-right: 30px;
+                font-size: 1.3rem;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -619,13 +929,14 @@
                 <div class="content-section">
                     <div class="about-me-head">About Me</div>
                     <div class="about-me-info">
-                        <p>Over the past eight years, I’ve built a strong foundation in uniting teams around shared
+                        <p>Over the past eight years, I've built a strong foundation in uniting teams around shared
                             goals and driving key business outcomes.
                             My journey in project management stems from a deep passion for turning ideas into impact.
                         </p>
 
                         <p>I focus on enabling data-driven decision making by breaking down complex challenges into
-                            clear and actionable strategies that enhance operations, streamline processes, boost workforce
+                            clear and actionable strategies that enhance operations, streamline processes, boost
+                            workforce
                             productivity and increase revenue.</p>
 
                         <p>
@@ -640,13 +951,144 @@
                             <i class="fa fa-users"></i> Team Leadership
                         </div>
                         <div class="badge">
-                            <i class="fa fa-users"></i> Strategy & Operations 
+                            <i class="fa fa-users"></i> Strategy & Operations
                         </div>
                         <div class="badge">
                             <i class="fa fa-lightbulb-o"></i> Requirement Analysis
                         </div>
                         <div class="badge">
                             <i class="fa fa-line-chart"></i> Business Process Improvement
+                        </div>
+                    </div>
+
+                    <button class="projects-toggle">
+                        View My Projects <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <!-- Projects Section (initially hidden) -->
+                <div class="projects-section">
+                    <div class="about-me-head">Project Timeline</div>
+
+                    <div class="timeline">
+                        <!-- Project 1 -->
+                        <div class="timeline-item" data-project="pure-go-pro">
+                            <div class="timeline-content">
+                                <h3>Pure Go Pro</h3>
+                                <div class="tech-tags">
+                                    <span>Node.js</span>
+                                    <span>React Native</span>
+                                    <span>Elastic Search</span>
+                                </div>
+                                <p>Global mobile app for diamond trade shows with real-time sales execution.</p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="timeline-item" data-project="hcis">
+                            <div class="timeline-content">
+                                <h3>HCIS – Human Capital Management System</h3>
+                                <div class="tech-tags">
+                                    <span>Angular</span>
+                                    <span>Node.js</span>
+                                    <span>React Native</span>
+                                </div>
+                                <p>Enterprise HR platform serving 10,000+ users with CERT-IN security.</p>
+                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Detail Modals -->
+                <!-- Pure Go Pro Detail -->
+                <div class="project-detail" id="pure-go-pro-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">Pure Go Pro</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>Node.js</span>
+                                <span>React Native</span>
+                                <span>Elastic Search</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">A global mobile & iPad
+                                application designed for diamond trade shows, empowering Key Account Managers (KAMs) to
+                                manage appointments, interact with clients, and execute sales seamlessly, all in
+                                real-time. The app is currently being used at 30+ international shows every year,
+                                enhancing on ground efficiency and customer experience.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features:</div>
+                            <ul>
+                                <li>Customer registration via card scanning</li>
+                                <li>Offline-first architecture ensuring uninterrupted usage</li>
+                                <li>Stock-to-invoice flow with real-time confirmation</li>
+                                <li>Low-latency design optimized for live showrooms</li>
+                                <li>DeepLink integration for secure ERP ↔ e-commerce sync</li>
+                                <li>End-to-end order & invoice automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HCIS Detail -->
+                <div class="project-detail" id="hcis-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">HCIS – Human Capital Management System</h2>
+
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>Angular</span>
+                                <span>Node.js</span>
+                                <span>React Native</span>
+                            </div>
+                        </div>
+
+                        <div class="project-platforms" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">📱 Available On:</div>
+                            <div class="platform-tags">
+                                <span><i class="fab fa-google-play" style="margin-right: 5px;"></i> Play Store</span>
+                                <span><i class="fab fa-app-store" style="margin-right: 5px;"></i> App Store</span>
+                            </div>
+                        </div>
+
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">An enterprise grade HR platform
+                                used by 10,000+ users, covering end-to-end HRIMS to Payroll management. Hosted on a
+                                Nutanix server the first in-house deployment by a client in Gujarat, where security was
+                                a top priority. Worked closely with CERT-IN auditors (CertBar) to ensure full compliance
+                                and successful production deployment. The platform is used across all units of SRK
+                                Exports, managed by 35+ departments and 8 global units.</p>
+                        </div>
+
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Planned and executed the transformation from legacy C# software to a modern
+                                    web-based module, including comprehensive data synchronization and migrating full
+                                    operational units to the new system</li>
+                                <li>Centralized employee lifecycle & payroll management</li>
+                                <li>Smart Survey + Data Analytics module enabled strategic insights, saving ₹50 lakhs
+                                    annually</li>
+                                <li>High-level Control Center with hierarchy and manual override, enabling Super Admin
+                                    to manage and control every data field</li>
+                                <li>SMS, Email, and Firebase integration for live notifications</li>
+                                <li>Highly secure system with CERT-IN cybersecurity approval</li>
+                                <li>Role-based access and mobile-first experience across iOS & Android</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -673,6 +1115,157 @@
                 shape.style.height = shape.style.width;
                 shape.style.animationDuration = (Math.random() * 20 + 10) + 's';
                 shape.style.animationDelay = (Math.random() * 5) + 's';
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Projects toggle functionality
+            const projectsToggle = document.querySelector('.projects-toggle');
+            const projectsSection = document.querySelector('.projects-section');
+
+            projectsToggle.addEventListener('click', function () {
+                projectsSection.classList.toggle('active');
+                projectsToggle.classList.toggle('active');
+
+                if (projectsSection.classList.contains('active')) {
+                    const timelineItems = document.querySelectorAll('.timeline-item');
+                    timelineItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 200);
+                    });
+
+                    // Smooth scroll to projects section with better positioning
+                    setTimeout(() => {
+                        const headerOffset = 80; // Adjust this value based on your header height
+                        const elementPosition = projectsSection.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            });
+
+            // Project detail functionality
+            const timelineItems = document.querySelectorAll('.timeline-content');
+            const projectDetails = document.querySelectorAll('.project-detail');
+            const closeButtons = document.querySelectorAll('.close-detail');
+            let lastClickedItem = null;
+            let originalScrollPosition = 0;
+
+            function openProjectDetail(projectId, clickEvent) {
+                const projectDetail = document.getElementById(`${projectId}-detail`);
+                const detailContent = projectDetail.querySelector('.project-detail-content');
+
+                // Store the clicked item and current scroll position
+                lastClickedItem = clickEvent.currentTarget;
+                originalScrollPosition = window.scrollY;
+
+                // Get the clicked element's position
+                const clickedElement = clickEvent.currentTarget;
+                const rect = clickedElement.getBoundingClientRect();
+
+                projectDetail.style.visibility = 'hidden';
+                projectDetail.classList.add('active');
+
+                setTimeout(() => {
+                    const contentHeight = detailContent.offsetHeight;
+                    const viewportHeight = window.innerHeight;
+                    const clickY = rect.top;
+
+                    let targetY;
+
+                    if (contentHeight < viewportHeight - 100) {
+                        if (clickY > viewportHeight / 2) {
+                            targetY = clickY - contentHeight - 20;
+                        } else {
+                            targetY = clickY + rect.height + 20;
+                        }
+
+                        if (targetY + contentHeight > viewportHeight - 20) {
+                            targetY = viewportHeight - contentHeight - 20;
+                        }
+                        if (targetY < 20) targetY = 20;
+                    } else {
+                        targetY = 20;
+                    }
+
+                    detailContent.style.marginTop = `${targetY}px`;
+                    projectDetail.style.visibility = 'visible';
+
+                    const finalRect = detailContent.getBoundingClientRect();
+                    if (finalRect.top < 0 || finalRect.bottom > viewportHeight) {
+                        const scrollTarget = window.scrollY + finalRect.top - 20;
+                        window.scrollTo({
+                            top: scrollTarget,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 50);
+
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeProjectDetail(modal) {
+                const detailContent = modal.querySelector('.project-detail-content');
+                detailContent.style.marginTop = '';
+                modal.classList.remove('active');
+                modal.style.visibility = '';
+                document.body.style.overflow = 'auto';
+
+                // Restore scroll position and ensure clicked item is visible
+                if (lastClickedItem) {
+                    setTimeout(() => {
+                        const itemRect = lastClickedItem.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+
+                        // If the item is not fully visible in viewport
+                        if (itemRect.top < 0 || itemRect.bottom > viewportHeight) {
+                            const targetScroll = originalScrollPosition;
+                            window.scrollTo({
+                                top: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 50);
+                }
+            }
+
+            timelineItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const projectId = this.closest('.timeline-item').dataset.project;
+                    openProjectDetail(projectId, e);
+                });
+            });
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const modal = this.closest('.project-detail');
+                    closeProjectDetail(modal);
+                });
+            });
+
+            projectDetails.forEach(modal => {
+                modal.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        closeProjectDetail(this);
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    const activeModal = document.querySelector('.project-detail.active');
+                    if (activeModal) {
+                        closeProjectDetail(activeModal);
+                    }
+                }
             });
         });
     </script>
