@@ -148,7 +148,6 @@
             transition: all 0.5s ease;
             position: relative;
             z-index: 1;
-            animation: float 6s ease-in-out infinite;
         }
 
         .image:hover {
@@ -174,34 +173,20 @@
             animation: pulse 2s infinite;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(2deg);
-            }
-
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-        }
-
         @keyframes pulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0.7;
             }
 
             50% {
                 transform: scale(1.05);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                opacity: 0.4;
             }
 
             100% {
                 transform: scale(1);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0.7;
             }
         }
 
@@ -478,25 +463,152 @@
             animation-delay: 6s;
         }
 
-        @keyframes gradientBG {
+        @keyframes float {
             0% {
-                background-position: 0% 50%;
+                transform: translateY(0) rotate(0deg);
             }
 
             50% {
-                background-position: 100% 50%;
+                transform: translateY(-20px) rotate(180deg);
             }
 
             100% {
-                background-position: 0% 50%;
+                transform: translateY(0) rotate(360deg);
             }
         }
 
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge i {
+            margin-right: 5px;
+        }
+
+        @media screen and (max-width: 767px) {
+            .container-fluid {
+                padding: 10px;
+            }
+
+            .card-container {
+                margin: 0;
+                border-radius: 15px;
+            }
+
+            .card-container-inner {
+                padding: 15px;
+                flex-direction: column;
+            }
+
+            .profile-section,
+            .content-section {
+                padding: 10px;
+                width: 100%;
+            }
+
+            .image {
+                height: 150px;
+                width: 150px;
+                margin-bottom: 20px;
+            }
+
+            .user-name {
+                font-size: 1.8rem;
+            }
+
+            .designation {
+                font-size: 1rem;
+            }
+
+            .about-me-info {
+                font-size: 0.9rem;
+            }
+
+            .about-me-head {
+                text-align: center;
+            }
+
+            .about-me-head::after {
+                margin: 10px auto;
+            }
+        }
+
+        .projects-section {
+            width: 100%;
+            padding: 20px;
+            margin-top: 30px;
+            transition: all 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .projects-section.active {
+            max-height: fit-content;
+            opacity: 1;
+            padding: 20px;
+        }
+
+        /* Projects Toggle Button */
+        .projects-toggle {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .projects-toggle:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .projects-toggle i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .projects-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        /* Timeline */
         .timeline {
             position: relative;
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         .timeline::after {
@@ -509,12 +621,10 @@
             left: 50%;
             margin-left: -1px;
             z-index: 1;
-            animation: gradientBG 15s ease infinite;
-            background-size: 200% 200%;
         }
 
         .timeline-item {
-            padding: 8px 30px;
+            padding: 10px 40px;
             position: relative;
             width: 50%;
             box-sizing: border-box;
@@ -537,28 +647,23 @@
         }
 
         .timeline-content {
-            padding: 15px;
+            padding: 20px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            border: 1px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                linear-gradient(45deg, var(--primary), var(--secondary)) border-box;
         }
 
         .timeline-content:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            animation: pulse 2s infinite;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
         .timeline-content h3 {
             color: var(--primary);
-            margin: 0 0 8px 0;
-            font-size: 1.1rem;
+            margin-top: 0;
         }
 
         .timeline-item:nth-child(odd) .timeline-content::after {
@@ -587,28 +692,6 @@
             z-index: 2;
         }
 
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 8px 0;
-        }
-
-        .tech-tags span {
-            background: rgba(24, 153, 205, 0.1);
-            color: var(--primary);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-        }
-
-        .timeline-content p {
-            margin: 8px 0;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            color: #666;
-        }
-
         /* Project Detail View */
         .project-detail {
             position: fixed;
@@ -625,7 +708,7 @@
             pointer-events: none;
             transition: all 0.3s ease;
             overflow-y: auto;
-            padding: 15px 0;
+            padding: 20px 0;
         }
 
         .project-detail.active {
@@ -637,9 +720,9 @@
             background: white;
             width: 90%;
             max-width: 800px;
-            max-height: 90vh;
+            max-height: 85vh;
             border-radius: 15px;
-            padding: 20px;
+            padding: 30px;
             position: relative;
             transform: scale(0.9);
             transition: all 0.3s ease;
@@ -652,29 +735,6 @@
             transform: scale(1);
         }
 
-        .project-detail-content h2 {
-            margin: 0 0 15px 0;
-            font-size: 1.4rem;
-            padding-right: 30px;
-        }
-
-        .project-detail-content .tech-stack,
-        .project-detail-content .project-overview,
-        .project-detail-content .project-features {
-            margin-bottom: 15px;
-        }
-
-        .project-detail-content ul {
-            margin: 8px 0;
-            padding-left: 20px;
-        }
-
-        .project-detail-content li {
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
         .close-detail {
             position: absolute;
             top: 15px;
@@ -682,7 +742,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #666;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             z-index: 1;
             width: 30px;
             height: 30px;
@@ -696,7 +756,21 @@
         .close-detail:hover {
             color: var(--accent);
             background: white;
-            transform: rotate(90deg);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tech-tags span {
+            background: rgba(24, 153, 205, 0.1);
+            color: var(--primary);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
         }
 
         .platform-tags {
@@ -730,17 +804,48 @@
         }
 
         @media screen and (max-width: 767px) {
-            .timeline {
-                padding: 0 10px;
-                margin: 15px auto;
+            .timeline::after {
+                left: 31px;
             }
 
             .timeline-item {
-                padding: 6px 20px;
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -38px;
+                top: 20px;
+                border: 3px solid var(--primary);
             }
 
             .timeline-content {
-                padding: 12px;
+                position: relative;
+                margin-left: 0;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .tech-tags {
+                margin: 8px 0;
+            }
+
+            .tech-tags span {
+                font-size: 0.75rem;
+                padding: 2px 8px;
+            }
+
+            .project-features ul {
+                columns: 1;
             }
 
             .project-detail {
@@ -748,243 +853,15 @@
             }
 
             .project-detail-content {
-                padding: 15px;
-                margin: 5px auto;
+                width: 95%;
+                padding: 20px;
+                margin: 10px;
+                max-height: 85vh;
             }
 
             .project-detail-content h2 {
-                font-size: 1.2rem;
-                margin-bottom: 12px;
-            }
-
-            .tech-tags {
-                gap: 4px;
-                margin: 6px 0;
-            }
-
-            .tech-tags span {
-                padding: 2px 6px;
-                font-size: 0.7rem;
-            }
-        }
-
-        .projects-section {
-            width: 100%;
-            padding: 20px;
-            margin-top: 30px;
-            transition: all 0.5s ease;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .projects-section.active {
-            max-height: 3000px;
-            opacity: 1;
-            padding: 20px;
-        }
-
-        /* Projects Toggle Button */
-        .projects-toggle {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 20px 0;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            overflow: hidden;
-        }
-
-        .projects-toggle:hover {
-            transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .projects-toggle i {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .projects-toggle.active i {
-            transform: rotate(180deg);
-        }
-
-        .projects-toggle::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.3),
-                    transparent);
-            transform: rotate(45deg);
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-
-        .projects-toggle:hover::after {
-            animation: shine 1.5s;
-            opacity: 1;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .badge-container[style*="justify-content: flex-start;"] {
-            margin: 15px 0;
-        }
-
-        .badge {
-            padding: 8px 15px;
-            color: white;
-            border-radius: 25px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-        }
-
-        .badge[style*="background: var(--accent)"] {
-            background: linear-gradient(45deg, var(--accent), #ff7b00) !important;
-        }
-
-        .badge[style*="background: var(--primary)"] {
-            background: linear-gradient(45deg, var(--primary), #0056b3) !important;
-        }
-
-        .badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .badge::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            z-index: -1;
-            border-radius: 26px;
-            background-size: 200% 200%;
-            animation: gradientBorder 3s ease infinite;
-        }
-
-        .badge[style*="background: var(--accent)"]::before {
-            background: linear-gradient(45deg, var(--accent), #ff7b00, var(--primary));
-        }
-
-        .badge[style*="background: var(--primary)"]::before {
-            background: linear-gradient(45deg, var(--primary), #0056b3, var(--accent));
-        }
-
-        .badge i {
-            margin-right: 8px;
-            font-size: 1rem;
-            animation: certificateRotate 3s ease infinite;
-        }
-
-        @keyframes certificateRotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            25% {
-                transform: rotate(10deg);
-            }
-
-            75% {
-                transform: rotate(-10deg);
-            }
-
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        @keyframes gradientBorder {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .badge::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.3),
-                    transparent);
-            transform: rotate(45deg);
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-
-        .badge:hover::after {
-            animation: shine 1.5s;
-            opacity: 1;
-        }
-
-        @media screen and (max-width: 767px) {
-            .badge-container {
-                gap: 8px;
-                justify-content: center;
-            }
-
-            .badge {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
-
-            .badge i {
-                font-size: 0.9rem;
-                margin-right: 6px;
+                padding-right: 30px;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -1182,7 +1059,6 @@
                                 <div style="color: var(--accent); font-weight: 600;">View Details →</div>
                             </div>
                         </div>
-
                         <!-- Project 7 -->
                         <div class="timeline-item" data-project="pmo">
                             <div class="timeline-content">
@@ -1221,6 +1097,26 @@
                                 <p>Digital archive system managing 50+ TB of multimedia content with NASS integration.
                                 </p>
                                 <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                        </div>
+
+                        <!-- Other Projects -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>Other Projects</h3>
+                                <div class="tech-tags">
+                                    <span>.NET</span>
+                                    <span>SQL</span>
+                                    <span>PHP</span>
+                                    <span>Node.js</span>
+                                </div>
+                                <ul style="list-style: none; padding-left: 0; margin: 15px 0;">
+                                    <li style="margin-bottom: 8px;">• <strong>Cabin & Conference Management:</strong> Streamlines booking and allocation of office spaces</li>
+                                    <li style="margin-bottom: 8px;">• <strong>Foodcourt Management:</strong> Digital solution for canteen orders and coordination</li>
+                                    <li style="margin-bottom: 8px;">• <strong>Travel Desk:</strong> End-to-end travel booking and expense management platform</li>
+                                    <li style="margin-bottom: 8px;">• <strong>Conclave Event Website:</strong> Portal for organizing large scale conferences</li>
+                                    <li style="margin-bottom: 8px;">• <strong>Portfolio Management:</strong> Custom portfolio websites for company firms and leaders</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -1277,8 +1173,6 @@
                                 <span>Angular</span>
                                 <span>Node.js</span>
                                 <span>React Native</span>
-                                <span>SQL</span>
-                                <span>Web-Socket</span>
                             </div>
                         </div>
 
@@ -1320,7 +1214,6 @@
                     </div>
                 </div>
 
-                <!-- Hirest Detail -->
                 <div class="project-detail" id="hirest-detail">
                     <div class="project-detail-content">
                         <span class="close-detail">&times;</span>
@@ -1414,7 +1307,7 @@
                                 <span>React Native</span>
                                 <span>Node.js</span>
                                 <span>Angular</span>
-                                <span>SQL</span>
+                                <span>NoSQL</span>
                             </div>
                         </div>
 
