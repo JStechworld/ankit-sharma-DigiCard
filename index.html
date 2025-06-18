@@ -15,15 +15,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1899cd;
-            --secondary: #54b036;
-            --accent: #f49817;
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ffb347;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            --card-gradient: linear-gradient(135deg, #c2c8dd 60%, #c8d6fd 100%);
+            --scroll-thumb: #a5b4fc;
+            --scroll-track: #e0e7ff;
         }
 
         html,
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f5f5f5;
+            background: var(--bg-gradient);
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -40,16 +44,14 @@
         }
 
         .card-container {
-            background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+            background: var(--card-gradient);
+            width: 100vw;
+            max-width: none;
+            margin: 0;
             border-radius: 20px;
             padding: 3px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: transform 0.5s;
             transform-style: preserve-3d;
         }
@@ -74,64 +76,146 @@
         }
 
         .card-container-inner {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 18px;
-            padding: 30px;
-            transition: all 0.3s ease;
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            position: relative;
+            flex-direction: row;
+            height: 95vh;
+            /* Full viewport height */
             overflow: hidden;
         }
 
-        .card-container-inner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-            transform: rotate(30deg);
-            animation: shine 8s infinite linear;
-            opacity: 0;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) rotate(30deg);
-                opacity: 0;
-            }
-
-            20% {
-                opacity: 0.5;
-            }
-
-            100% {
-                transform: translateX(100%) rotate(30deg);
-                opacity: 0;
-            }
-        }
-
         .profile-section {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
+            flex: 0 0 30%;
+            /* 30% width */
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            height: 95vh;
+            overflow-y: auto;
+            z-index: 2;
+            background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%);
+            border-radius: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 24px 0 rgba(106, 17, 203, 0.08);
             position: relative;
-            z-index: 2;
+        }
+
+        /* Animated background for profile-section */
+        .profile-bg-anim {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            border-radius: 22px;
+            pointer-events: none;
+        }
+
+        .profile-bg-anim .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            animation: float-bubble 12s infinite linear;
+        }
+
+        .profile-bg-anim .bubble1 {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            top: 60%;
+            animation-delay: 0s;
+        }
+
+        .profile-bg-anim .bubble2 {
+            width: 80px;
+            height: 80px;
+            left: 60%;
+            top: 10%;
+            animation-delay: 3s;
+        }
+
+        .profile-bg-anim .bubble3 {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            top: 70%;
+            animation-delay: 6s;
+        }
+
+        .profile-bg-anim .bubble4 {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            top: 20%;
+            animation-delay: 1.5s;
+        }
+
+        .profile-bg-anim .bubble5 {
+            width: 50px;
+            height: 50px;
+            left: 80%;
+            top: 40%;
+            animation-delay: 5s;
+        }
+
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.18;
+            }
+
+            50% {
+                transform: translateY(-40px) scale(1.1);
+                opacity: 0.28;
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.18;
+            }
         }
 
         .content-section {
-            flex: 2;
-            min-width: 300px;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
+            flex: 1 1 70%;
+            /* 70% width */
+            height: 95vh;
+            overflow-y: auto;
+            padding: 40px 30px;
+            background: transparent;
+            border-radius: 22px;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar Styles */
+        .profile-section::-webkit-scrollbar,
+        .content-section::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .profile-section::-webkit-scrollbar-thumb,
+        .content-section::-webkit-scrollbar-thumb {
+            background: var(--scroll-thumb);
+            border-radius: 8px;
+        }
+
+        .profile-section::-webkit-scrollbar-track,
+        .content-section::-webkit-scrollbar-track {
+            background: var(--scroll-track);
+            border-radius: 8px;
+        }
+
+        /* For Firefox */
+        .profile-section,
+        .content-section {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scroll-thumb) var(--scroll-track);
         }
 
         .image-container {
@@ -485,14 +569,18 @@
             }
 
             .card-container-inner {
-                padding: 15px;
                 flex-direction: column;
+                height: auto;
             }
 
             .profile-section,
             .content-section {
-                padding: 10px;
+                height: auto;
+                min-width: 0;
                 width: 100%;
+                position: static;
+                box-shadow: none;
+                flex: 1 1 100%;
             }
 
             .image {
@@ -835,6 +923,126 @@
                 font-size: 1.3rem;
             }
         }
+
+        .section-toggle-bar {
+            padding: 4px 0;
+        }
+
+        .section-toggle {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 10px 28px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px rgba(106, 17, 203, 0.08);
+        }
+
+        .section-toggle.active,
+        .section-toggle:hover {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255, 179, 71, 0.12);
+        }
+
+        .section-content {
+            margin-bottom: 30px;
+        }
+
+        .awards-list {
+            gap: 24px;
+        }
+
+        .award-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(106, 17, 203, 0.07);
+            padding: 24px 20px;
+            min-width: 220px;
+            max-width: 320px;
+            flex: 1 1 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .award-card:hover {
+            box-shadow: 0 6px 24px rgba(106, 17, 203, 0.15);
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        .award-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .award-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: var(--secondary);
+        }
+
+        .award-desc {
+            font-size: 0.97rem;
+            color: #555;
+        }
+
+        .blogs-list {
+            gap: 24px;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(106, 17, 203, 0.07);
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 6px 24px rgba(106, 17, 203, 0.15);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .blog-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .blog-meta {
+            font-size: 0.92rem;
+            color: var(--accent);
+        }
+
+        .blog-desc {
+            font-size: 0.98rem;
+            color: #555;
+        }
+
+        .blog-link {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-top: 4px;
+            text-decoration: underline;
+            font-size: 0.98rem;
+            align-self: flex-start;
+            transition: color 0.2s;
+        }
+
+        .blog-link:hover {
+            color: var(--primary);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -867,6 +1075,13 @@
                 </div>
 
                 <div class="profile-section">
+                    <div class="profile-bg-anim">
+                        <div class="bubble bubble1"></div>
+                        <div class="bubble bubble2"></div>
+                        <div class="bubble bubble3"></div>
+                        <div class="bubble bubble4"></div>
+                        <div class="bubble bubble5"></div>
+                    </div>
                     <div class="image-container">
                         <div class="image">
                             <img src="AS.png" class="photo" alt="Ankit Sharma">
@@ -882,7 +1097,7 @@
                         Efficiency
                     </div>
 
-                    <div class="badge-container" style="justify-content: flex-start;">
+                    <div class="badge-container">
                         <a href="https://bcert.me/sydmtzghl" target="_blank" class="badge"
                             style="background: var(--accent);">
                             <i class="fa fa-certificate"></i> A-CSPO® Certified
@@ -948,167 +1163,249 @@
                         </div>
                     </div>
 
-                    <button class="projects-toggle">
-                        View My Projects <i class="fas fa-chevron-down"></i>
-                    </button>
-                </div>
+                    <!-- Toggle Bar for Projects, Awards, Blogs -->
+                    <div class="section-toggle-bar"
+                        style="display: flex; justify-content: center; gap: 16px; margin: 30px 0 20px 0;">
+                        <button class="section-toggle" data-section="projects">View My Projects</button>
+                        <button class="section-toggle" data-section="awards">View My Awards</button>
+                        <button class="section-toggle" data-section="blogs">View My Blogs</button>
+                    </div>
 
-                <!-- Projects Section (initially hidden) -->
-                <div class="projects-section">
-                    <div class="about-me-head">Project Timeline</div>
-
-                    <div class="timeline">
-                        <!-- Project 1 -->
-                        <div class="timeline-item" data-project="pure-go-pro">
-                            <div class="timeline-content">
-                                <h3>Pure Go Pro</h3>
-                                <div class="tech-tags">
-                                    <span>Node.js</span>
-                                    <span>React Native</span>
-                                    <span>Elastic Search</span>
+                    <!-- Projects Section (initially hidden) -->
+                    <div class="projects-section section-content" style="display: none;">
+                        <div class="about-me-head">Project Timeline</div>
+                        <div class="timeline">
+                            <!-- Project 1: Travel Desk -->
+                            <div class="timeline-item" data-project="travel-desk">
+                                <div class="timeline-content">
+                                    <h3>Travel Desk – End-to-End Travel Booking & Expense Management</h3>
+                                    <div class="tech-tags">
+                                        <span>AngularJS</span>
+                                        <span>Node.js</span>
+                                    </div>
+                                    <p>A comprehensive travel management platform for booking, managing, and tracking
+                                        travel and expenses for corporate and personal use. The system streamlines the
+                                        entire process from search to booking, payment, and reporting, ensuring a
+                                        seamless experience for users and administrators alike.</p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
                                 </div>
-                                <p>Global mobile app for diamond trade shows with real-time sales execution.</p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            </div>
+                            <!-- Project 2: AirConnect – Air Ventura -->
+                            <div class="timeline-item" data-project="airconnect">
+                                <div class="timeline-content">
+                                    <h3>AirConnect – Air Ventura (Flight Booking & Travel Management System)</h3>
+                                    <div class="tech-tags">
+                                        <span>AngularJS</span>
+                                        <span>Node.js</span>
+                                    </div>
+                                    <p>AirConnect – Air Ventura is a full-featured flight booking and payment platform
+                                        designed to simplify corporate and personal travel planning. Built with a fast,
+                                        responsive front-end and robust backend logic, the system offers a seamless
+                                        interface for users to search, book, and manage flights across multiple domestic
+                                        and international airlines.</p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 3 -->
+                            <div class="timeline-item" data-project="hcis">
+                                <div class="timeline-content">
+                                    <h3>HCIS – Human Capital Management System</h3>
+                                    <div class="tech-tags">
+                                        <span>Angular</span>
+                                        <span>Node.js</span>
+                                        <span>React Native</span>
+                                    </div>
+                                    <p>Enterprise HR platform serving 10,000+ users with CERT-IN security.</p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 4 -->
+                            <div class="timeline-item" data-project="hirest">
+                                <div class="timeline-content">
+                                    <h3>Hirest – Hiring Management System</h3>
+                                    <div class="tech-tags">
+                                        <span>MongoDB</span>
+                                        <span>Java</span>
+                                        <span>Node.js</span>
+                                        <span>Angular</span>
+                                    </div>
+                                    <p>Comprehensive hiring platform managing 50,000+ users from application to
+                                        onboarding.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 5 -->
+                            <div class="timeline-item" data-project="custom-app">
+                                <div class="timeline-content">
+                                    <h3>Custom App – Diamond Export Compliance</h3>
+                                    <div class="tech-tags">
+                                        <span>Node.js</span>
+                                        <span>Java</span>
+                                        <span>React Native</span>
+                                    </div>
+                                    <p>Internal compliance management system for diamond export tracking and
+                                        documentation.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 6 -->
+                            <div class="timeline-item" data-project="rou">
+                                <div class="timeline-content">
+                                    <h3>ROU – Pure Rough</h3>
+                                    <div class="tech-tags">
+                                        <span>React Native</span>
+                                        <span>Node.js</span>
+                                        <span>Angular</span>
+                                        <span>NoSQL</span>
+                                    </div>
+                                    <p>Advanced tender bidding system for rough diamonds with high-precision valuation.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 7 -->
+                            <div class="timeline-item" data-project="e360">
+                                <div class="timeline-content">
+                                    <h3>E360 – 360 Feed Forward System</h3>
+                                    <div class="tech-tags">
+                                        <span>React Native</span>
+                                        <span>Node.js</span>
+                                        <span>SQL</span>
+                                    </div>
+                                    <p>Comprehensive peer-to-peer 360° assessment platform for organizational
+                                        evaluation.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+                            <!-- Project 8 -->
+                            <div class="timeline-item" data-project="pmo">
+                                <div class="timeline-content">
+                                    <h3>PMO Governance Tool</h3>
+                                    <div class="tech-tags">
+                                        <span>.NET</span>
+                                        <span>SQL</span>
+                                    </div>
+                                    <p>Time & Cost Governance System for project management and resource utilization.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 9 -->
+                            <div class="timeline-item" data-project="gl-scheduler">
+                                <div class="timeline-content">
+                                    <h3>GL Scheduler – The Glance</h3>
+                                    <div class="tech-tags">
+                                        <span>PHP</span>
+                                        <span>Android</span>
+                                        <span>MySQL</span>
+                                    </div>
+                                    <p>Smart calendar suite for executive-level scheduling and productivity management.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Project 10 -->
+                            <div class="timeline-item" data-project="archive">
+                                <div class="timeline-content">
+                                    <h3>Archive – Digital Memory System</h3>
+                                    <div class="tech-tags">
+                                        <span>C#.NET</span>
+                                        <span>SQL</span>
+                                    </div>
+                                    <p>Digital archive system managing 50+ TB of multimedia content with NASS
+                                        integration.
+                                    </p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
+
+                            <!-- Other Projects -->
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h3>Other Projects</h3>
+                                    <div class="tech-tags">
+                                        <span>.NET</span>
+                                        <span>SQL</span>
+                                        <span>PHP</span>
+                                        <span>Node.js</span>
+                                    </div>
+                                    <ul style="list-style: none; padding-left: 0; margin: 15px 0;">
+                                        <li style="margin-bottom: 8px;">• <strong>Cabin & Conference
+                                                Management:</strong>
+                                            Streamlines booking and allocation of office spaces</li>
+                                        <li style="margin-bottom: 8px;">• <strong>Foodcourt Management:</strong> Digital
+                                            solution for canteen orders and coordination</li>
+                                        <li style="margin-bottom: 8px;">• <strong>Conclave Event Website:</strong>
+                                            Portal
+                                            for organizing large scale conferences</li>
+                                        <li style="margin-bottom: 8px;">• <strong>Portfolio Management:</strong> Custom
+                                            portfolio websites for company firms and leaders</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Project 2 -->
-                        <div class="timeline-item" data-project="hcis">
-                            <div class="timeline-content">
-                                <h3>HCIS – Human Capital Management System</h3>
-                                <div class="tech-tags">
-                                    <span>Angular</span>
-                                    <span>Node.js</span>
-                                    <span>React Native</span>
-                                </div>
-                                <p>Enterprise HR platform serving 10,000+ users with CERT-IN security.</p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                    <!-- Awards Section (initially hidden) -->
+                    <div class="awards-section section-content" style="display: none;">
+                        <div class="about-me-head">Awards & Recognitions</div>
+                        <div class="awards-list" style="display: flex; flex-wrap: wrap; gap: 24px; margin-top: 20px;">
+                            <div class="award-card">
+                                <div class="award-icon"><i class="fa fa-trophy"></i></div>
+                                <div class="award-title">Best Project Manager 2023</div>
+                                <div class="award-desc">Awarded for outstanding leadership and project delivery at SRKAY
+                                    Consulting Group.</div>
+                            </div>
+                            <div class="award-card">
+                                <div class="award-icon"><i class="fa fa-star"></i></div>
+                                <div class="award-title">Innovation Champion</div>
+                                <div class="award-desc">Recognized for driving digital transformation and innovative
+                                    solutions in HR Tech.</div>
+                            </div>
+                            <div class="award-card">
+                                <div class="award-icon"><i class="fa fa-certificate"></i></div>
+                                <div class="award-title">Certified Scrum Professional</div>
+                                <div class="award-desc">Achieved A-CSPO® and CSPO® certifications for agile product
+                                    management.</div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Project 3 -->
-                        <div class="timeline-item" data-project="hirest">
-                            <div class="timeline-content">
-                                <h3>Hirest – Hiring Management System</h3>
-                                <div class="tech-tags">
-                                    <span>MongoDB</span>
-                                    <span>Java</span>
-                                    <span>Node.js</span>
-                                    <span>Angular</span>
-                                </div>
-                                <p>Comprehensive hiring platform managing 50,000+ users from application to onboarding.
-                                </p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                    <!-- Blogs Section (initially hidden) -->
+                    <div class="blogs-section section-content" style="display: none;">
+                        <div class="about-me-head">Latest Blogs</div>
+                        <div class="blogs-list"
+                            style="display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
+                            <div class="blog-card">
+                                <div class="blog-title">How Agile Transforms Business Outcomes</div>
+                                <div class="blog-meta">May 2024 · 5 min read</div>
+                                <div class="blog-desc">A practical guide to implementing agile methodologies for better
+                                    team performance and business results.</div>
+                                <a href="#" class="blog-link">Read More</a>
                             </div>
-                        </div>
-
-                        <!-- Project 4 -->
-                        <div class="timeline-item" data-project="custom-app">
-                            <div class="timeline-content">
-                                <h3>Custom App – Diamond Export Compliance</h3>
-                                <div class="tech-tags">
-                                    <span>Node.js</span>
-                                    <span>Java</span>
-                                    <span>React Native</span>
-                                </div>
-                                <p>Internal compliance management system for diamond export tracking and documentation.
-                                </p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                            <div class="blog-card">
+                                <div class="blog-title">Digital HR: The Next Frontier</div>
+                                <div class="blog-meta">April 2024 · 7 min read</div>
+                                <div class="blog-desc">Exploring the impact of digital transformation in HR and how to
+                                    prepare your organization for the future.</div>
+                                <a href="#" class="blog-link">Read More</a>
                             </div>
-                        </div>
-
-                        <!-- Project 5 -->
-                        <div class="timeline-item" data-project="rou">
-                            <div class="timeline-content">
-                                <h3>ROU – Pure Rough</h3>
-                                <div class="tech-tags">
-                                    <span>React Native</span>
-                                    <span>Node.js</span>
-                                    <span>Angular</span>
-                                    <span>NoSQL</span>
-                                </div>
-                                <p>Advanced tender bidding system for rough diamonds with high-precision valuation.</p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
-                            </div>
-                        </div>
-
-                        <!-- Project 6 -->
-                        <div class="timeline-item" data-project="e360">
-                            <div class="timeline-content">
-                                <h3>E360 – 360 Feed Forward System</h3>
-                                <div class="tech-tags">
-                                    <span>React Native</span>
-                                    <span>Node.js</span>
-                                    <span>SQL</span>
-                                </div>
-                                <p>Comprehensive peer-to-peer 360° assessment platform for organizational evaluation.
-                                </p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
-                            </div>
-                        </div>
-                        <!-- Project 7 -->
-                        <div class="timeline-item" data-project="pmo">
-                            <div class="timeline-content">
-                                <h3>PMO Governance Tool</h3>
-                                <div class="tech-tags">
-                                    <span>.NET</span>
-                                    <span>SQL</span>
-                                </div>
-                                <p>Time & Cost Governance System for project management and resource utilization.</p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
-                            </div>
-                        </div>
-
-                        <!-- Project 8 -->
-                        <div class="timeline-item" data-project="gl-scheduler">
-                            <div class="timeline-content">
-                                <h3>GL Scheduler – The Glance</h3>
-                                <div class="tech-tags">
-                                    <span>PHP</span>
-                                    <span>Android</span>
-                                    <span>MySQL</span>
-                                </div>
-                                <p>Smart calendar suite for executive-level scheduling and productivity management.</p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
-                            </div>
-                        </div>
-
-                        <!-- Project 9 -->
-                        <div class="timeline-item" data-project="archive">
-                            <div class="timeline-content">
-                                <h3>Archive – Digital Memory System</h3>
-                                <div class="tech-tags">
-                                    <span>C#.NET</span>
-                                    <span>SQL</span>
-                                </div>
-                                <p>Digital archive system managing 50+ TB of multimedia content with NASS integration.
-                                </p>
-                                <div style="color: var(--accent); font-weight: 600;">View Details →</div>
-                            </div>
-                        </div>
-
-                        <!-- Other Projects -->
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>Other Projects</h3>
-                                <div class="tech-tags">
-                                    <span>.NET</span>
-                                    <span>SQL</span>
-                                    <span>PHP</span>
-                                    <span>Node.js</span>
-                                </div>
-                                <ul style="list-style: none; padding-left: 0; margin: 15px 0;">
-                                    <li style="margin-bottom: 8px;">• <strong>Cabin & Conference Management:</strong>
-                                        Streamlines booking and allocation of office spaces</li>
-                                    <li style="margin-bottom: 8px;">• <strong>Foodcourt Management:</strong> Digital
-                                        solution for canteen orders and coordination</li>
-                                    <li style="margin-bottom: 8px;">• <strong>Travel Desk:</strong> End-to-end travel
-                                        booking and expense management platform</li>
-                                    <li style="margin-bottom: 8px;">• <strong>Conclave Event Website:</strong> Portal
-                                        for organizing large scale conferences</li>
-                                    <li style="margin-bottom: 8px;">• <strong>Portfolio Management:</strong> Custom
-                                        portfolio websites for company firms and leaders</li>
-                                </ul>
+                            <div class="blog-card">
+                                <div class="blog-title">Scaling Startups: Lessons from 20 to 700+ Employees</div>
+                                <div class="blog-meta">March 2024 · 6 min read</div>
+                                <div class="blog-desc">Key strategies and pitfalls to avoid when rapidly scaling a
+                                    tech-driven organization.</div>
+                                <a href="#" class="blog-link">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -1486,6 +1783,85 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Travel Desk Detail -->
+                <div class="project-detail" id="travel-desk-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">Travel Desk – End-to-End Travel Booking &
+                            Expense Management</h2>
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>AngularJS</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">A comprehensive travel
+                                management platform for booking, managing, and tracking travel and expenses for
+                                corporate and personal use. The system streamlines the entire process from search to
+                                booking, payment, and reporting, ensuring a seamless experience for users and
+                                administrators alike.</p>
+                        </div>
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Real-time travel search and booking for flights, hotels, and cabs</li>
+                                <li>Multi-step booking flow with approval and expense tracking</li>
+                                <li>Integrated payment gateway for secure transactions</li>
+                                <li>User profile and travel history management</li>
+                                <li>Admin panel for reporting, invoice generation, and analytics</li>
+                                <li>Mobile-responsive UI for access across devices</li>
+                                <li>Scalable architecture for high-volume bookings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AirConnect – Air Ventura Detail -->
+                <div class="project-detail" id="airconnect-detail">
+                    <div class="project-detail-content">
+                        <span class="close-detail">&times;</span>
+                        <h2 style="color: var(--primary); margin-top: 0;">AirConnect – Air Ventura (Flight Booking &
+                            Travel Management System)</h2>
+                        <div class="tech-stack">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🧪 Tech Stack:</div>
+                            <div class="tech-tags">
+                                <span>AngularJS</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                        <div class="project-overview" style="margin-bottom: 20px;">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">🛠 Overview:</div>
+                            <p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">AirConnect – Air Ventura is a
+                                full-featured flight booking and payment platform designed to simplify corporate and
+                                personal travel planning. Built with a fast, responsive front-end and robust backend
+                                logic, the system offers a seamless interface for users to search, book, and manage
+                                flights across multiple domestic and international airlines.</p>
+                        </div>
+                        <div class="project-features">
+                            <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">✨ Key Features & Impact:
+                            </div>
+                            <ul>
+                                <li>Real-time flight search engine with filters for price, time, class, and airline
+                                    preferences</li>
+                                <li>Multi-step booking flow with seat selection, add-ons, and real-time fare locking
+                                </li>
+                                <li>Integrated payment gateway for secure transactions via UPI, cards, and net banking
+                                </li>
+                                <li>User profile and history tracking for repeat booking, saved preferences, and easy
+                                    cancellations</li>
+                                <li>Admin panel for reporting, invoice generation, and travel data analytics</li>
+                                <li>Designed with a mobile-responsive UI for access across devices</li>
+                                <li>Can be extended to integrate with corporate travel desks or loyalty systems</li>
+                                <li>Scalable architecture to support high-volume concurrent bookings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1572,35 +1948,65 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Projects toggle functionality
-            const projectsToggle = document.querySelector('.projects-toggle');
+            // Section toggle functionality (Projects, Awards, Blogs)
+            const sectionToggles = document.querySelectorAll('.section-toggle');
+            const sectionContents = document.querySelectorAll('.section-content');
             const projectsSection = document.querySelector('.projects-section');
 
-            projectsToggle.addEventListener('click', function () {
-                projectsSection.classList.toggle('active');
-                projectsToggle.classList.toggle('active');
-
-                if (projectsSection.classList.contains('active')) {
-                    const timelineItems = document.querySelectorAll('.timeline-item');
-                    timelineItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 200);
-                    });
-
-                    // Smooth scroll to projects section with better positioning
+            // Show timeline items when projects section is shown
+            function showTimelineItems() {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                timelineItems.forEach((item, index) => {
                     setTimeout(() => {
-                        const headerOffset = 80; // Adjust this value based on your header height
-                        const elementPosition = projectsSection.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        item.classList.add('visible');
+                    }, index * 200);
+                });
+            }
 
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
+            // Hide timeline items
+            function hideTimelineItems() {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                timelineItems.forEach(item => item.classList.remove('visible'));
+            }
+
+            let openSection = null;
+            sectionToggles.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const section = this.getAttribute('data-section');
+                    const sectionDiv = document.querySelector('.' + section + '-section');
+                    // If this section is already open, close it
+                    if (openSection === section) {
+                        sectionToggles.forEach(b => b.classList.remove('active'));
+                        sectionContents.forEach(sec => {
+                            sec.style.display = 'none';
+                            sec.classList.remove('active');
                         });
-                    }, 100);
-                }
+                        openSection = null;
+                        hideTimelineItems();
+                    } else {
+                        sectionToggles.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        sectionContents.forEach(sec => {
+                            if (sec.classList.contains(section + '-section')) {
+                                sec.style.display = '';
+                                sec.classList.add('active');
+                                if (section === 'projects') {
+                                    showTimelineItems();
+                                } else {
+                                    hideTimelineItems();
+                                }
+                            } else {
+                                sec.style.display = 'none';
+                                sec.classList.remove('active');
+                            }
+                        });
+                        openSection = section;
+                    }
+                });
             });
+
+            // Show timeline items on load (for projects)
+            showTimelineItems();
 
             // Project detail functionality
             const timelineItems = document.querySelectorAll('.timeline-content');
