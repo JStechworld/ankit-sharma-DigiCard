@@ -18,8 +18,8 @@
             --primary: #6a11cb;
             --secondary: #2575fc;
             --accent: #ffb347;
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
-            --card-gradient: linear-gradient(135deg, #c2c8dd 60%, #c8d6fd 100%);
+            --bg-gradient: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            --card-gradient: linear-gradient(135deg, #ffffff 60%, #ffffff 100%);
             --scroll-thumb: #a5b4fc;
             --scroll-track: #e0e7ff;
         }
@@ -32,6 +32,10 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.7;
+            color: #23272f;
         }
 
         .container-fluid {
@@ -92,13 +96,13 @@
             height: 95vh;
             overflow-y: auto;
             z-index: 2;
-            background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%);
+            /* background: linear-gradient(135deg, #f8fafc 60%, #e0e7ff 100%); */
             border-radius: 22px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 24px 0 rgba(106, 17, 203, 0.08);
+            /* box-shadow: 0 4px 24px 0 rgba(106, 17, 203, 0.08); */
             position: relative;
         }
 
@@ -115,71 +119,6 @@
             overflow: hidden;
             border-radius: 22px;
             pointer-events: none;
-        }
-
-        .profile-bg-anim .bubble {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.18;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            animation: float-bubble 12s infinite linear;
-        }
-
-        .profile-bg-anim .bubble1 {
-            width: 120px;
-            height: 120px;
-            left: 10%;
-            top: 60%;
-            animation-delay: 0s;
-        }
-
-        .profile-bg-anim .bubble2 {
-            width: 80px;
-            height: 80px;
-            left: 60%;
-            top: 10%;
-            animation-delay: 3s;
-        }
-
-        .profile-bg-anim .bubble3 {
-            width: 60px;
-            height: 60px;
-            left: 70%;
-            top: 70%;
-            animation-delay: 6s;
-        }
-
-        .profile-bg-anim .bubble4 {
-            width: 100px;
-            height: 100px;
-            left: 30%;
-            top: 20%;
-            animation-delay: 1.5s;
-        }
-
-        .profile-bg-anim .bubble5 {
-            width: 50px;
-            height: 50px;
-            left: 80%;
-            top: 40%;
-            animation-delay: 5s;
-        }
-
-        @keyframes float-bubble {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.18;
-            }
-
-            50% {
-                transform: translateY(-40px) scale(1.1);
-                opacity: 0.28;
-            }
-
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.18;
-            }
         }
 
         .content-section {
@@ -392,7 +331,7 @@
             text-align: center;
             margin: 15px 0;
             line-height: 1.6;
-            font-weight: 400;
+            font-weight: 600;
             position: relative;
             padding: 15px;
             background: rgba(248, 249, 250, 0.7);
@@ -407,7 +346,7 @@
             color: rgba(24, 153, 205, 0.1);
             top: -15px;
             left: 5px;
-            font-family: serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .info::after {
@@ -417,7 +356,7 @@
             color: rgba(24, 153, 205, 0.1);
             bottom: -30px;
             right: 5px;
-            font-family: serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         .social-icons {
@@ -473,8 +412,9 @@
             font-size: 1rem;
             line-height: 1.8;
             text-align: left;
-            font-weight: 400;
+            font-weight: 600;
             position: relative;
+            font-family: 'Poppins', sans-serif;
         }
 
         .about-me-info p {
@@ -587,6 +527,7 @@
                 height: 150px;
                 width: 150px;
                 margin-bottom: 20px;
+                margin-top: 10px;
             }
 
             .user-name {
@@ -1176,6 +1117,18 @@
                         <div class="about-me-head">Project Timeline</div>
                         <div class="timeline">
                             <!-- Project 1: Travel Desk -->
+                            <div class="timeline-item" data-project="pure-go-pro">
+                                <div class="timeline-content">
+                                    <h3>Pure Go Pro</h3>
+                                    <div class="tech-tags">
+                                        <span>Node.js</span>
+                                        <span>React Native</span>
+                                        <span>Elastic Search</span>
+                                    </div>
+                                    <p>Global mobile app for diamond trade shows with real-time sales execution.</p>
+                                    <div style="color: var(--accent); font-weight: 600;">View Details →</div>
+                                </div>
+                            </div>
                             <div class="timeline-item" data-project="travel-desk">
                                 <div class="timeline-content">
                                     <h3>Travel Desk – End-to-End Travel Booking & Expense Management</h3>
@@ -1362,21 +1315,27 @@
                         <div class="awards-list" style="display: flex; flex-wrap: wrap; gap: 24px; margin-top: 20px;">
                             <div class="award-card">
                                 <div class="award-icon"><i class="fa fa-trophy"></i></div>
-                                <div class="award-title">Best Project Manager 2023</div>
-                                <div class="award-desc">Awarded for outstanding leadership and project delivery at SRKAY
-                                    Consulting Group.</div>
+                                <div class="award-title">5-Year Service Excellence Award</div>
+                                <div class="award-desc">Recognized for 5 years of consistent performance, dedication,
+                                    and impactful contributions to the organization.</div>
                             </div>
                             <div class="award-card">
                                 <div class="award-icon"><i class="fa fa-star"></i></div>
-                                <div class="award-title">Innovation Champion</div>
-                                <div class="award-desc">Recognized for driving digital transformation and innovative
-                                    solutions in HR Tech.</div>
+                                <div class="award-title">Excellence Award 2024</div>
+                                <div class="award-desc">Honored at the International Annual Function in Kuala Lumpur,
+                                    Malaysia for exceptional contributions to project management.</div>
                             </div>
                             <div class="award-card">
-                                <div class="award-icon"><i class="fa fa-certificate"></i></div>
-                                <div class="award-title">Certified Scrum Professional</div>
-                                <div class="award-desc">Achieved A-CSPO® and CSPO® certifications for agile product
-                                    management.</div>
+                                <div class="award-icon"><i class="fa fa-user"></i></div>
+                                <div class="award-title">Ultimate Contributor Award 2021</div>
+                                <div class="award-desc">Awarded as an Individual Contributor at the Surat Centre for
+                                    exemplary dedication and high performance.</div>
+                            </div>
+                            <div class="award-card">
+                                <div class="award-icon"><i class="fa fa-rocket"></i></div>
+                                <div class="award-title">Emerging Talent Award 2020</div>
+                                <div class="award-desc">Recognized for exceptional growth, initiative, and early impact
+                                    within the organization.</div>
                             </div>
                         </div>
                     </div>
@@ -1384,28 +1343,12 @@
                     <!-- Blogs Section (initially hidden) -->
                     <div class="blogs-section section-content" style="display: none;">
                         <div class="about-me-head">Latest Blogs</div>
-                        <div class="blogs-list"
-                            style="display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
+                        <div class="blogs-list" style="display: flex; flex-direction: column; gap: 24px; margin-top: 20px;">
                             <div class="blog-card">
-                                <div class="blog-title">How Agile Transforms Business Outcomes</div>
-                                <div class="blog-meta">May 2024 · 5 min read</div>
-                                <div class="blog-desc">A practical guide to implementing agile methodologies for better
-                                    team performance and business results.</div>
-                                <a href="#" class="blog-link">Read More</a>
-                            </div>
-                            <div class="blog-card">
-                                <div class="blog-title">Digital HR: The Next Frontier</div>
-                                <div class="blog-meta">April 2024 · 7 min read</div>
-                                <div class="blog-desc">Exploring the impact of digital transformation in HR and how to
-                                    prepare your organization for the future.</div>
-                                <a href="#" class="blog-link">Read More</a>
-                            </div>
-                            <div class="blog-card">
-                                <div class="blog-title">Scaling Startups: Lessons from 20 to 700+ Employees</div>
-                                <div class="blog-meta">March 2024 · 6 min read</div>
-                                <div class="blog-desc">Key strategies and pitfalls to avoid when rapidly scaling a
-                                    tech-driven organization.</div>
-                                <a href="#" class="blog-link">Read More</a>
+                                <div class="blog-title">Bridging Blue & White Collar with Smart HR Tech: My Journey with HCIS</div>
+                                <div class="blog-meta">Published Year: 2025</div>
+                                <div class="blog-desc">How we built and deployed HCIS, a comprehensive HR solution for 10,000+ employees across all levels, focusing on intuitive design, accessibility and real-world impact.</div>
+                                <a href="hcis-blog.html" class="blog-link" target="_blank">Read Full Blog &rarr;</a>
                             </div>
                         </div>
                     </div>
